@@ -14,7 +14,6 @@ call vundle#rc()
 Plugin 'gmarik/vundle'
 
 " My Plugins will plug-in here:
-Plugin 'Command-T'
 " ...
 
 filetype plugin indent on     " required
@@ -38,3 +37,5 @@ filetype plugin indent on     " required
 set noeb vb t_vb=
 set guifont=Menlo\ Regular:h15
 colorscheme kellys
+let mapleader=","
+
