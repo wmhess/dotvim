@@ -14,7 +14,7 @@ call vundle#rc()
 Plugin 'gmarik/vundle'
 
 " My Plugins will plug-in here:
-
+Plugin 'Command-T'
 " ...
 
 filetype plugin indent on     " required
