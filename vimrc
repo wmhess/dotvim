@@ -16,7 +16,7 @@ call vundle#rc()
 Plugin 'gmarik/vundle'
 
 " My Plugins will plug-in here:
-Plugin 'Command-T'
+Plugin 'git://git.wincent.com/command-t.git'
 " ...
 
 " required
