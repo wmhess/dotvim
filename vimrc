@@ -17,6 +17,7 @@ Plugin 'gmarik/vundle'
 
 " My Plugins will plug-in here:
 Plugin 'git://git.wincent.com/command-t.git'
+Plugin 'flazz/vim-colorschemes'
 " ...
 
 " required
@@ -41,7 +42,7 @@ filetype plugin indent on
 set noeb vb t_vb=
 set guifont=Menlo\ Regular:h15
 set linespace=7
-colorscheme kellys
+colorscheme jellybeans
 let mapleader=","
 " This mapping sets up Y to be consistent with the C and D operators, which act from the cursor to the end of the line. 
 " The default behavior of Y is to yank the whole line.
@@ -62,7 +63,7 @@ set number
 " show invisibles
 set list
 " Use the same symbols as TextMate for tabstops and EOLs
-set listchars=tab:▸\ ,eol:¬
+set listchars=tab:›_,trail:․,eol:¬
 
 "" Whitespace
 " don't wrap lines
