@@ -17,6 +17,7 @@ Plugin 'gmarik/vundle'
 
 " My Plugins will plug-in here:
 Plugin 'git://git.wincent.com/command-t.git'
+Plugin 'flazz/vim-colorschemes'
 " ...
 
 " required
@@ -62,7 +63,7 @@ set number
 " show invisibles
 set list
 " Use the same symbols as TextMate for tabstops and EOLs
-set listchars=tab:▸\ ,eol:¬
+set listchars=tab:›_,trail:․,eol:¬
 
 "" Whitespace
 " don't wrap lines
