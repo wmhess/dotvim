@@ -17,7 +17,8 @@ Plugin 'gmarik/vundle'
 
 " My Plugins will plug-in here:
 Plugin 'git://git.wincent.com/command-t.git'
-Plugin 'flazz/vim-colorschemes'
+Plugin 'git@github.com:flazz/vim-colorschemes.git'
+Plugin 'git@github.com:Valloric/MatchTagAlways.git'
 " ...
 
 " required
