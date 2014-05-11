@@ -42,6 +42,8 @@ filetype plugin indent on
 " =============================
 set noeb vb t_vb=
 set guifont=Menlo\ Regular:h15
+" allow hidden buffers without warning.
+set hidden
 set linespace=7
 colorscheme jellybeans
 let mapleader=","
