@@ -54,14 +54,19 @@ set guifont=Menlo\ Regular\:h15
 " allow hidden buffers without warning.
 set hidden
 set linespace=7
-colorscheme jellybeans
+colorscheme void
 "trying out automatically changing the colorscheme for .txt files
-autocmd BufEnter *.txt colorscheme hemisu
+autocmd BufEnter *.html colorscheme kellys
+autocmd BufEnter *.txt colorscheme void
 
 " turn off the swap files
 set noswapfile
 
-let mapleader=","
+" not really digging this remap anymore - gonna try using the default for a
+" while 
+"let mapleader=","
+"noremap \ ,
+
 " This mapping sets up Y to be consistent with the C and D operators, which act from the cursor to the end of the line. 
 " The default behavior of Y is to yank the whole line.
 nnoremap Y y$
