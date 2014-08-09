@@ -16,6 +16,7 @@ Plugin 'git://github.com/gmarik/vundle.git'
 
 " My Plugins will plug-in here:
 "Plugin 'git://git.wincent.com/command-t.git'
+Plugin 'git@github.com:honza/vim-snippets.git'
 Plugin 'git@github.com:SirVer/ultisnips.git'
 Plugin 'vim-colorschemes'
 Plugin 'git@github.com:kien/ctrlp.vim.git'
@@ -209,10 +210,22 @@ endif
 nmap <leader>v :tabedit $MYVIMRC<CR>
 
 " simplify working with split windows - http://vimcasts.org/episodes/working-with-windows/
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
+" nice idea, but it conflicts with how I have UltiSnips set up - I kinda like
+" the longer format with the w for now anyway - leaving it here until I get
+" used to using UtliSnips.
+" map <C-h> <C-w>h
+" map <C-j> <C-w>j
+" map <C-k> <C-w>k
+" map <C-l> <C-w>l
 
 " trying out this trim whitspace thing from: http://stackoverflow.com/questions/356126/how-can-you-automatically-remove-trailing-whitespace-in-vim
 autocmd BufWritePre *.txt,*.html :%s/\s\+$//e
+
+" ultisnips setup
+" " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<C-j>"
+let g:UltiSnipsJumpBackwardTrigger="<C-k>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
