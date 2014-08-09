@@ -16,6 +16,7 @@ Plugin 'git://github.com/gmarik/vundle.git'
 
 " My Plugins will plug-in here:
 "Plugin 'git://git.wincent.com/command-t.git'
+Plugin 'git@github.com:SirVer/ultisnips.git'
 Plugin 'vim-colorschemes'
 Plugin 'git@github.com:kien/ctrlp.vim.git'
 Plugin 'git@github.com:mattn/emmet-vim.git'
