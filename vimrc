@@ -71,12 +71,18 @@ set noswapfile
 " The default behavior of Y is to yank the whole line.
 nnoremap Y y$
 
-set wrap linebreak nolist
+set wrap
+set linebreak
+set nolist
+set textwidth=0
+set wrapmargin=0 " this keeps vim from adding a new line character when a word reaches the edge.
+set formatoptions+=1
+
 
 " turn off search highlight
 nnoremap <leader><space> :nohlsearch<CR>
-" trying out save on escape from insert - this works when typing Ctl [ or j twice.
-" that way typing Ctl [ is still just escape.
+" trying out save on escape from insert - this currently works when typing Ctl [ twice.
+" that way typing Ctl [ once or ;; twice is still just escape.
 inoremap <Esc><Esc> <Esc>:w<CR>
 
 " try this for automatically changing the working directory to the curent
@@ -145,6 +151,7 @@ hi Search ctermbg=black ctermfg=yellow term=underline
 " a clever escape key remap
 " it does weird things when you put comments on the same line right after it.
 " that's why all my comments are on thier own line now.
+inoremap ;; <Esc>
 inoremap jj <Esc>
 " Set %% as a shortcut to get the path of the active buffer:
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
@@ -164,7 +171,7 @@ nmap <down> gj
 vmap <up> gk
 vmap <down> gj
 
-set wrapmargin=5
+" set wrapmargin=5
 noremap <C-c> "*yy
 vnoremap <C-c> "*y
 
