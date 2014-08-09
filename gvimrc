@@ -5,3 +5,4 @@ colorscheme void
 set guioptions-=r
 " this one does it for the left scrollbar in vertically split windows
 set go-=L
+behave mswin
