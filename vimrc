@@ -15,21 +15,23 @@ call vundle#rc()
 Plugin 'git://github.com/gmarik/vundle.git'
 
 " My Plugins will plug-in here:
-"Plugin 'git://git.wincent.com/command-t.git'
-Plugin 'git@github.com:honza/vim-snippets.git'
 Plugin 'git@github.com:SirVer/ultisnips.git'
 Plugin 'git@github.com:flazz/vim-colorschemes.git'
 Plugin 'git@github.com:kien/ctrlp.vim.git'
 Plugin 'git@github.com:mattn/emmet-vim.git'
-Plugin 'git@github.com:Lokaltog/vim-easymotion.git'
-Plugin 'git@github.com:terryma/vim-multiple-cursors.git'
 Plugin 'git@github.com:itchyny/lightline.vim.git'
-"Plugin 'Valloric/MatchTagAlways'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'git@github.com:tpope/vim-vinegar.git'
+" My meh list:
+"Plugin 'git@github.com:honza/vim-snippets.git'
+"Plugin 'git@github.com:terryma/vim-multiple-cursors.git'
+"Plugin 'git@github.com:Valloric/YouCompleteMe.git'
+"Plugin 'git@github.com:Lokaltog/vim-easymotion.git'
+"Plugin 'Valloric/MatchTagAlways'
 "Plugin 'tpope/vim-surround'
 "Plugin 'ScrollColors', {'pinned' : 1}
 "Plugin 'bling/vim-airline'
+"Plugin 'git://git.wincent.com/command-t.git'
 " ...
 
 " required
@@ -52,7 +54,7 @@ filetype plugin indent on
 " And now for My Stuff:
 " =============================
 set noeb vb t_vb=
-set guifont=Menlo\ Regular\:h15
+set guifont=Menlo\ Bold\:h15
 " allow hidden buffers without warning.
 set hidden
 set linespace=7
@@ -223,9 +225,17 @@ autocmd BufWritePre *.txt,*.html :%s/\s\+$//e
 
 " ultisnips setup
 " " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsSnippetDirectories=["MyUltiSnips", "UltiSnips"]
 let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<C-j>"
-let g:UltiSnipsJumpBackwardTrigger="<C-k>"
+let g:UltiSnipsJumpForwardTrigger="<C-b>"
+let g:UltiSnipsJumpBackwardTrigger="<C-z>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
+
+" Bubble single lines
+nmap <C-Up> [e
+nmap <C-Down> ]e
+" Bubble multiple lines
+vmap <C-Up> [egv
+vmap <C-Down> ]egv
