@@ -15,7 +15,7 @@ call vundle#rc()
 Plugin 'git://github.com/gmarik/vundle.git'
 
 " My Plugins will plug-in here:
-Plugin 'git@github.com:SirVer/ultisnips.git'
+" Plugin 'git@github.com:SirVer/ultisnips.git'
 Plugin 'git@github.com:flazz/vim-colorschemes.git'
 Plugin 'git@github.com:kien/ctrlp.vim.git'
 Plugin 'git@github.com:mattn/emmet-vim.git'
