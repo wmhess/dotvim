@@ -15,7 +15,7 @@ call vundle#rc()
 Plugin 'git://github.com/gmarik/vundle.git'
 
 " My Plugins will plug-in here:
-Plugin 'git@github.com:SirVer/ultisnips.git'
+" Plugin 'git@github.com:SirVer/ultisnips.git'
 Plugin 'git@github.com:flazz/vim-colorschemes.git'
 Plugin 'git@github.com:kien/ctrlp.vim.git'
 Plugin 'git@github.com:mattn/emmet-vim.git'
@@ -225,7 +225,7 @@ autocmd BufWritePre *.txt,*.html :%s/\s\+$//e
 
 " ultisnips setup
 " " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsSnippetDirectories=["MyUltiSnips", "UltiSnips"]
+let g:UltiSnipsSnippetDirectories=["UltiSnips"]
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<C-b>"
 let g:UltiSnipsJumpBackwardTrigger="<C-z>"
