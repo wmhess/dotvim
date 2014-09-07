@@ -4,7 +4,6 @@
 set nocompatible
 " required
 filetype off
-
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
@@ -15,20 +14,24 @@ call vundle#rc()
 Plugin 'git://github.com/gmarik/vundle.git'
 
 " My Plugins will plug-in here:
-Plugin 'git@github.com:SirVer/ultisnips.git'
+" Plugin 'git@github.com:SirVer/ultisnips.git'
 Plugin 'git@github.com:flazz/vim-colorschemes.git'
 Plugin 'git@github.com:kien/ctrlp.vim.git'
-Plugin 'git@github.com:mattn/emmet-vim.git'
+Plugin 'git@github.com:rstacruz/sparkup.git'
+"Plugin 'git@github.com:mattn/emmet-vim.git'
 Plugin 'git@github.com:itchyny/lightline.vim.git'
-Plugin 'tpope/vim-unimpaired'
+Plugin 'git@github.com:tpope/vim-unimpaired.git'
+Plugin 'git@github.com:tpope/vim-repeat.git'
 Plugin 'git@github.com:tpope/vim-vinegar.git'
+Plugin 'git@github.com:nelstrom/vim-visual-star-search.git'
+Plugin 'https://github.com/tpope/vim-fugitive.git'
 " My meh list:
-"Plugin 'git@github.com:honza/vim-snippets.git'
 "Plugin 'git@github.com:terryma/vim-multiple-cursors.git'
+"Plugin 'git@github.com:honza/vim-snippets.git'
 "Plugin 'git@github.com:Valloric/YouCompleteMe.git'
 "Plugin 'git@github.com:Lokaltog/vim-easymotion.git'
 "Plugin 'Valloric/MatchTagAlways'
-"Plugin 'tpope/vim-surround'
+Plugin 'git@github.com:tpope/vim-surround'
 "Plugin 'ScrollColors', {'pinned' : 1}
 "Plugin 'bling/vim-airline'
 "Plugin 'git://git.wincent.com/command-t.git'
@@ -54,14 +57,14 @@ filetype plugin indent on
 " And now for My Stuff:
 " =============================
 set noeb vb t_vb=
-set guifont=Menlo\ Bold\:h15
+set guifont=Menlo\ Bold:h15
 " allow hidden buffers without warning.
 set hidden
 set linespace=7
-colorscheme void
+colorscheme hybrid
 "trying out automatically changing the colorscheme for .txt files
-autocmd BufEnter *.html colorscheme kellys
-autocmd BufEnter *.txt colorscheme void
+"autocmd BufEnter *.html colorscheme kali
+"autocmd BufEnter *.txt colorscheme kali
 
 " turn off the swap files
 set noswapfile
@@ -179,21 +182,6 @@ vmap <down> gj
 noremap <C-c> "*yy
 vnoremap <C-c> "*y
 
-"EasyMotion minimal stuff - let's figure out how to use this thing.
-let g:EasyMotion_do_mapping = 0 " Disable default mappings
-
-" Bi-directional find motion
-" Jump to anywhere you want with minimal keystrokes, with just one key binding.
-" `s{char}{label}`
-nmap s <Plug>(easymotion-s)
-" or
-" `s{char}{char}{label}`
-" Need one more keystroke, but on average, it may be more comfortable.
-nmap s <Plug>(easymotion-s2)
-
-" Turn on case sensitive feature
-let g:EasyMotion_smartcase = 1
-
 " JK motions: Line motions
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
@@ -239,3 +227,31 @@ nmap <C-Down> ]e
 " Bubble multiple lines
 vmap <C-Up> [egv
 vmap <C-Down> ]egv
+
+" I really want to like Multiple Cursors - but.. 
+" Hopefully this highligting setting will help with that.
+" Default highlighting (see help :highlight and help :highlight-link)
+highlight multiple_cursors_cursor term=reverse cterm=reverse gui=reverse
+highlight link multiple_cursors_visual Visual
+
+" See if this makes the command line any better - some of it doesn't look right on the mac - where's the ctrl-k?:
+:cnoremap <C-a>  <Home>
+:cnoremap <C-b>  <Left>
+:cnoremap <C-f>  <Right>
+:cnoremap <C-d>  <Delete>
+:cnoremap <M-b>  <S-Left>
+:cnoremap <M-f>  <S-Right>
+:cnoremap <M-d>  <S-right><Delete>
+:cnoremap <Esc>b <S-Left>
+:cnoremap <Esc>f <S-Right>
+:cnoremap <Esc>d <S-right><Delete>
+:cnoremap <C-g>  <C-c>
+
+" Lightline stuff
+set laststatus=2
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'tabline_separator': { 'left': "", 'right': "" },
+      \ 'tabline_subseparator': { 'left': "", 'right': "" },
+      \ }
+
