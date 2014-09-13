@@ -4,6 +4,12 @@
 set nocompatible
 " required
 filetype off
+filetype plugin on
+
+if !has('gui_running')
+  set t_Co=256
+endif
+
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
@@ -14,24 +20,29 @@ call vundle#rc()
 Plugin 'git://github.com/gmarik/vundle.git'
 
 " My Plugins will plug-in here:
-" Plugin 'git@github.com:SirVer/ultisnips.git'
 Plugin 'git@github.com:flazz/vim-colorschemes.git'
 Plugin 'git@github.com:kien/ctrlp.vim.git'
 Plugin 'git@github.com:rstacruz/sparkup.git'
-"Plugin 'git@github.com:mattn/emmet-vim.git'
+Plugin 'git@github.com:tomtom/tcomment_vim.git'
+Plugin 'git@github.com:yonchu/accelerated-smooth-scroll.git'
 Plugin 'git@github.com:itchyny/lightline.vim.git'
 Plugin 'git@github.com:tpope/vim-unimpaired.git'
 Plugin 'git@github.com:tpope/vim-repeat.git'
 Plugin 'git@github.com:tpope/vim-vinegar.git'
 Plugin 'git@github.com:nelstrom/vim-visual-star-search.git'
 Plugin 'https://github.com/tpope/vim-fugitive.git'
-" My meh list:
+Plugin 'git@github.com:tpope/vim-surround'
+Plugin 'git@github.com:jlanzarotta/bufexplorer.git'
+" My meh list: and what do you care?
+"Plugin 'git@github.com:tpope/vim-commentary.git'
+"Plugin 'git@github.com:SirVer/ultisnips.git'
+"Plugin 'git@github.com:mattn/emmet-vim.git'
+"Plugin 'git@github.com:scrooloose/nerdcommenter.git'
 "Plugin 'git@github.com:terryma/vim-multiple-cursors.git'
 "Plugin 'git@github.com:honza/vim-snippets.git'
 "Plugin 'git@github.com:Valloric/YouCompleteMe.git'
 "Plugin 'git@github.com:Lokaltog/vim-easymotion.git'
 "Plugin 'Valloric/MatchTagAlways'
-Plugin 'git@github.com:tpope/vim-surround'
 "Plugin 'ScrollColors', {'pinned' : 1}
 "Plugin 'bling/vim-airline'
 "Plugin 'git://git.wincent.com/command-t.git'
@@ -248,10 +259,172 @@ highlight link multiple_cursors_visual Visual
 :cnoremap <C-g>  <C-c>
 
 " Lightline stuff
+set noshowmode
 set laststatus=2
+"let g:lightline = {
+"      \ 'colorscheme': 'wombat',
+"      \ 'tabline_separator': { 'left': "", 'right': "" },
+"      \ 'tabline_subseparator': { 'left': "", 'right': "" },
+"      \ }
+"	let g:lightline = {
+"		\ 'colorscheme': 'wombat',
+"		\ 'active': {
+"		\   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
+"		\ },
+"		\ 'component_function': {
+"		\   'fugitive': 'MyFugitive',
+"		\   'filename': 'MyFilename'
+"		\ }
+"		\ }
+"	function! MyModified()
+"		return &ft =~ 'help\|vimfiler' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+"	endfunction
+"	function! MyReadonly()
+"		return &ft !~? 'help\|vimfiler' && &readonly ? 'RO' : ''
+"	endfunction
+"	function! MyFilename()
+"		return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
+"		\ (&ft == 'vim:filer' ? vimfiler#get_status_string() :
+"		\  &ft == 'unite' ? unite#get_status_string() :
+"		\  &ft == 'vimshell' ? vimshell#get_status_string() :
+"		\ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
+"		\ ('' != MyModified() ? ' ' . MyModified() : '')
+"	endfunction
+"	function! MyFugitive()
+"		if &ft !~? 'vimfiler' && exists("*fugitive#head")
+"			return fugitive#head()
+"		endif
+"		return ''
+"	endfunction
+"
+"
 let g:lightline = {
       \ 'colorscheme': 'wombat',
-      \ 'tabline_separator': { 'left': "", 'right': "" },
-      \ 'tabline_subseparator': { 'left': "", 'right': "" },
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ], ['ctrlpmark'] ],
+      \   'right': [ [ 'syntastic', 'lineinfo' ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ]
+      \ },
+      \ 'component_function': {
+      \   'fugitive': 'MyFugitive',
+      \   'filename': 'MyFilename',
+      \   'fileformat': 'MyFileformat',
+      \   'filetype': 'MyFiletype',
+      \   'fileencoding': 'MyFileencoding',
+      \   'mode': 'MyMode',
+      \   'ctrlpmark': 'CtrlPMark',
+      \ },
+      \ 'component_expand': {
+      \   'syntastic': 'SyntasticStatuslineFlag',
+      \ },
+      \ 'component_type': {
+      \   'syntastic': 'error',
+      \ },
+      \ 'subseparator': { 'left': '|', 'right': '|' }
       \ }
+
+function! MyModified()
+  return &ft =~ 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+endfunction
+
+function! MyReadonly()
+  return &ft !~? 'help' && &readonly ? 'RO' : ''
+endfunction
+
+function! MyFilename()
+  let fname = expand('%:t')
+  return fname == 'ControlP' ? g:lightline.ctrlp_item :
+        \ fname == '__Tagbar__' ? g:lightline.fname :
+        \ fname =~ '__Gundo\|NERD_tree' ? '' :
+        \ &ft == 'vimfiler' ? vimfiler#get_status_string() :
+        \ &ft == 'unite' ? unite#get_status_string() :
+        \ &ft == 'vimshell' ? vimshell#get_status_string() :
+        \ ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
+        \ ('' != fname ? fname : '[No Name]') .
+        \ ('' != MyModified() ? ' ' . MyModified() : '')
+endfunction
+
+function! MyFugitive()
+  try
+    if expand('%:t') !~? 'Tagbar\|Gundo\|NERD' && &ft !~? 'vimfiler' && exists('*fugitive#head')
+      let mark = ''  " edit here for cool mark
+      let _ = fugitive#head()
+      return strlen(_) ? mark._ : ''
+    endif
+  catch
+  endtry
+  return ''
+endfunction
+
+function! MyFileformat()
+  return winwidth(0) > 70 ? &fileformat : ''
+endfunction
+
+function! MyFiletype()
+  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
+endfunction
+
+function! MyFileencoding()
+  return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
+endfunction
+
+function! MyMode()
+  let fname = expand('%:t')
+  return fname == '__Tagbar__' ? 'Tagbar' :
+        \ fname == 'ControlP' ? 'CtrlP' :
+        \ fname == '__Gundo__' ? 'Gundo' :
+        \ fname == '__Gundo_Preview__' ? 'Gundo Preview' :
+        \ fname =~ 'NERD_tree' ? 'NERDTree' :
+        \ &ft == 'unite' ? 'Unite' :
+        \ &ft == 'vimfiler' ? 'VimFiler' :
+        \ &ft == 'vimshell' ? 'VimShell' :
+        \ winwidth(0) > 60 ? lightline#mode() : ''
+endfunction
+
+function! CtrlPMark()
+  if expand('%:t') =~ 'ControlP'
+    call lightline#link('iR'[g:lightline.ctrlp_regex])
+    return lightline#concatenate([g:lightline.ctrlp_prev, g:lightline.ctrlp_item
+          \ , g:lightline.ctrlp_next], 0)
+  else
+    return ''
+  endif
+endfunction
+
+let g:ctrlp_status_func = {
+  \ 'main': 'CtrlPStatusFunc_1',
+  \ 'prog': 'CtrlPStatusFunc_2',
+  \ }
+
+function! CtrlPStatusFunc_1(focus, byfname, regex, prev, item, next, marked)
+  let g:lightline.ctrlp_regex = a:regex
+  let g:lightline.ctrlp_prev = a:prev
+  let g:lightline.ctrlp_item = a:item
+  let g:lightline.ctrlp_next = a:next
+  return lightline#statusline(0)
+endfunction
+
+function! CtrlPStatusFunc_2(str)
+  return lightline#statusline(0)
+endfunction
+
+let g:tagbar_status_func = 'TagbarStatusFunc'
+
+function! TagbarStatusFunc(current, sort, fname, ...) abort
+    let g:lightline.fname = a:fname
+  return lightline#statusline(0)
+endfunction
+
+augroup AutoSyntastic
+  autocmd!
+  autocmd BufWritePost *.c,*.cpp call s:syntastic()
+augroup END
+function! s:syntastic()
+  SyntasticCheck
+  call lightline#update()
+endfunction
+
+let g:unite_force_overwrite_statusline = 0
+let g:vimfiler_force_overwrite_statusline = 0
+let g:vimshell_force_overwrite_statusline = 0
+
 
