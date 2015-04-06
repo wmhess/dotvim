@@ -38,7 +38,7 @@ Plugin 'git@github.com:jlanzarotta/bufexplorer.git'
 "Plugin 'git@github.com:SirVer/ultisnips.git'
 "Plugin 'git@github.com:mattn/emmet-vim.git'
 "Plugin 'git@github.com:scrooloose/nerdcommenter.git'
-"Plugin 'git@github.com:terryma/vim-multiple-cursors.git'
+Plugin 'git@github.com:terryma/vim-multiple-cursors.git'
 "Plugin 'git@github.com:honza/vim-snippets.git'
 "Plugin 'git@github.com:Valloric/YouCompleteMe.git'
 "Plugin 'git@github.com:Lokaltog/vim-easymotion.git'
@@ -102,6 +102,7 @@ nnoremap <leader><space> :nohlsearch<CR>
 " trying out save on escape from insert - this currently works when typing Ctl [ twice.
 " that way typing Ctl [ once or ;; twice is still just escape.
 inoremap <Esc><Esc> <Esc>:w<CR>
+inoremap kk <Esc>:w<CR>
 
 " try this for automatically changing the working directory to the curent
 " file's path
@@ -194,13 +195,13 @@ noremap <C-c> "*yy
 vnoremap <C-c> "*y
 
 " JK motions: Line motions
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
+"map <Leader>j <Plug>(easymotion-j)
+"map <Leader>k <Plug>(easymotion-k)
 
 " Toggle spell checking on and off with `,s`
 nmap <silent> <leader>s :set spell!<CR>
 
-" Set region to British English
+" Set region to US English
 set spelllang=en_us
 
 " Source the vimrc file after saving it: http://vimcasts.org/episodes/updating-your-vimrc-file-on-the-fly/
@@ -239,12 +240,6 @@ nmap <C-Down> ]e
 vmap <C-Up> [egv
 vmap <C-Down> ]egv
 
-" I really want to like Multiple Cursors - but.. 
-" Hopefully this highligting setting will help with that.
-" Default highlighting (see help :highlight and help :highlight-link)
-highlight multiple_cursors_cursor term=reverse cterm=reverse gui=reverse
-highlight link multiple_cursors_visual Visual
-
 " See if this makes the command line any better - some of it doesn't look right on the mac - where's the ctrl-k?:
 :cnoremap <C-a>  <Home>
 :cnoremap <C-b>  <Left>
@@ -257,6 +252,15 @@ highlight link multiple_cursors_visual Visual
 :cnoremap <Esc>f <S-Right>
 :cnoremap <Esc>d <S-right><Delete>
 :cnoremap <C-g>  <C-c>
+
+" Insert mode mappings to mimic some the emacs keybindings ctrl-n and ctrl-p are obviously a bad idea:
+inoremap <C-e> <C-o>$
+inoremap <C-a> <C-o>0
+inoremap <C-b>  <Left>
+inoremap <C-f>  <Right>
+inoremap <C-d>  <Delete>
+inoremap <C-k>   <C-o>D
+
 
 " Lightline stuff
 set noshowmode
@@ -427,4 +431,14 @@ let g:unite_force_overwrite_statusline = 0
 let g:vimfiler_force_overwrite_statusline = 0
 let g:vimshell_force_overwrite_statusline = 0
 
+" almost as good as leader spacebar, but not quite.
+nnoremap <silent> <Leader>/ :nohlsearch<CR>
 
+" select all
+map <Leader>a ggVG
+" begining and end of line on home row
+noremap H ^
+noremap L $
+
+vmap > >gv
+vmap < <gv
