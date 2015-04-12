@@ -19,6 +19,10 @@ Plugin 'gmarik/vundle'
 Plugin 'git://git.wincent.com/command-t.git'
 Plugin 'git@github.com:flazz/vim-colorschemes.git'
 Plugin 'git@github.com:Valloric/MatchTagAlways.git'
+Plugin 'git@github.com:mattn/emmet-vim'
+Plugin 'gerw/vim-HiLinkTrace'
+Plugin 'git@github.com:vim-scripts/hexHighlight.vim.git'
+Plugin 'https://github.com/tpope/vim-vinegar.git'
 " ...
 
 " required
@@ -102,3 +106,16 @@ inoremap ;; <Esc>
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 "nnoremap <esc> :noh<return><esc>
 nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
+
+" Show syntax highlighting groups for word under cursor
+nmap <C-S-P> :call <SID>SynStack()<CR>
+function! <SID>SynStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
+
+if exists('*HexHighlight()')
+  nmap <leader>h :call HexHighlight()<Return>
+endif
