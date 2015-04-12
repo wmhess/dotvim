@@ -33,6 +33,8 @@ Plugin 'git@github.com:nelstrom/vim-visual-star-search.git'
 Plugin 'https://github.com/tpope/vim-fugitive.git'
 Plugin 'git@github.com:tpope/vim-surround'
 Plugin 'git@github.com:jlanzarotta/bufexplorer.git'
+Plugin 'git@github.com:gcmt/wildfire.vim.git'
+Plugin 'git@github.com:tpope/vim-haml.git'
 " My meh list: and what do you care?
 "Plugin 'git@github.com:tpope/vim-commentary.git'
 "Plugin 'git@github.com:SirVer/ultisnips.git'
@@ -426,5 +428,4 @@ endfunction
 let g:unite_force_overwrite_statusline = 0
 let g:vimfiler_force_overwrite_statusline = 0
 let g:vimshell_force_overwrite_statusline = 0
-
 
