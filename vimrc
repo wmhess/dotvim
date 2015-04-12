@@ -202,7 +202,7 @@ map <Leader>k <Plug>(easymotion-k)
 " Toggle spell checking on and off with `,s`
 nmap <silent> <leader>s :set spell!<CR>
 
-" Set region to British English
+" Set region to US English
 set spelllang=en_us
 
 " Source the vimrc file after saving it: http://vimcasts.org/episodes/updating-your-vimrc-file-on-the-fly/
@@ -240,12 +240,6 @@ nmap <C-Down> ]e
 " Bubble multiple lines
 vmap <C-Up> [egv
 vmap <C-Down> ]egv
-
-" I really want to like Multiple Cursors - but.. 
-" Hopefully this highligting setting will help with that.
-" Default highlighting (see help :highlight and help :highlight-link)
-highlight multiple_cursors_cursor term=reverse cterm=reverse gui=reverse
-highlight link multiple_cursors_visual Visual
 
 " See if this makes the command line any better - some of it doesn't look right on the mac - where's the ctrl-k?:
 :cnoremap <C-a>  <Home>
@@ -429,3 +423,17 @@ let g:unite_force_overwrite_statusline = 0
 let g:vimfiler_force_overwrite_statusline = 0
 let g:vimshell_force_overwrite_statusline = 0
 
+<<<<<<< .merge_file_P2feXU
+=======
+" almost as good as leader spacebar, but not quite.
+nnoremap <silent> <Leader>/ :nohlsearch<CR>
+
+" select all
+map <Leader>a ggVG
+" begining and end of line on home row
+noremap H ^
+noremap L $
+
+vmap > >gv
+vmap < <gv
+>>>>>>> .merge_file_s534Sx
