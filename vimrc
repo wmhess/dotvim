@@ -20,7 +20,7 @@ call vundle#rc()
 Plugin 'git://github.com/gmarik/vundle.git'
 
 " My Plugins will plug-in here:
-Plugin 'git@github.com:flazz/vim-colorschemes.git'
+"Plugin 'git@github.com:flazz/vim-colorschemes.git'
 "Plugin 'git@github.com:kien/ctrlp.vim.git'
 "Plugin 'git@github.com:rstacruz/sparkup.git'
 "Plugin 'git@github.com:tomtom/tcomment_vim.git'
@@ -72,7 +72,7 @@ set guifont=Menlo\ Bold:h15
 " allow hidden buffers without warning.
 set hidden
 set linespace=7
-colorscheme hybrid
+colorscheme kellys
 "trying out automatically changing the colorscheme for .txt files
 "autocmd BufEnter *.html colorscheme kali
 "autocmd BufEnter *.txt colorscheme kali
