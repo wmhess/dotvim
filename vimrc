@@ -33,12 +33,12 @@ Plugin 'git@github.com:nelstrom/vim-visual-star-search.git'
 Plugin 'https://github.com/tpope/vim-fugitive.git'
 Plugin 'git@github.com:tpope/vim-surround'
 Plugin 'git@github.com:jlanzarotta/bufexplorer.git'
-" My meh list: and what do you care?
+Plugin 'git@github.com:terryma/vim-multiple-cursors.git'
+" My meh list: Tried them out but not crazy about them.
 "Plugin 'git@github.com:tpope/vim-commentary.git'
 "Plugin 'git@github.com:SirVer/ultisnips.git'
 "Plugin 'git@github.com:mattn/emmet-vim.git'
 "Plugin 'git@github.com:scrooloose/nerdcommenter.git'
-Plugin 'git@github.com:terryma/vim-multiple-cursors.git'
 "Plugin 'git@github.com:honza/vim-snippets.git'
 "Plugin 'git@github.com:Valloric/YouCompleteMe.git'
 "Plugin 'git@github.com:Lokaltog/vim-easymotion.git'
@@ -80,11 +80,6 @@ colorscheme hybrid
 " turn off the swap files
 set noswapfile
 
-" not really digging this remap anymore - gonna try using the default for a
-" while 
-"let mapleader=","
-"noremap \ ,
-
 " This mapping sets up Y to be consistent with the C and D operators, which act from the cursor to the end of the line. 
 " The default behavior of Y is to yank the whole line.
 nnoremap Y y$
@@ -95,7 +90,6 @@ set nolist
 set textwidth=0
 set wrapmargin=0 " this keeps vim from adding a new line character when a word reaches the edge.
 set formatoptions+=1
-
 
 " turn off search highlight
 nnoremap <leader><space> :nohlsearch<CR>
@@ -121,7 +115,6 @@ function! TwiddleCase(str)
 endfunction
 vnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgv
 
-
 " =================================================
 " Stuff from Mislav's post @:
 " http://mislav.uniqpath.com/2011/12/vim-revisited/
@@ -144,7 +137,7 @@ set listchars=tab:›_,trail:․,eol:¬
 "set nowrap
 " a tab is two spaces (or set this to 4)
 "set tabstop=2 shiftwidth=2
-" see the vimcast about tabs for an explanation of using this instead
+" * See the vimcast about tabs for an explanation of why I'm using this instead
 set ts=4 sts=4 sw=4 noexpandtab
 " use spaces, not tabs (optional)
 " use spaces, not tabs (optional)
@@ -170,17 +163,19 @@ hi Search ctermbg=black ctermfg=yellow term=underline
 " a clever escape key remap
 " it does weird things when you put comments on the same line right after it.
 " that's why all my comments are on thier own line now.
+
+" I always forget to use this one
 inoremap ;; <Esc>
-inoremap jj <Esc>
+
 " Set %% as a shortcut to get the path of the active buffer:
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
+
 "http://vimcasts.org/episodes/the-edit-command/
 map <leader>ew :e %%
 map <leader>es :sp %%
 map <leader>ev :vsp %%
 map <leader>et :tabe %%
 
-"nnoremap <esc> :noh<return><esc>
 nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 
 imap <up> <C-O>gk
@@ -190,13 +185,8 @@ nmap <down> gj
 vmap <up> gk
 vmap <down> gj
 
-" set wrapmargin=5
 noremap <C-c> "*yy
 vnoremap <C-c> "*y
-
-" JK motions: Line motions
-"map <Leader>j <Plug>(easymotion-j)
-"map <Leader>k <Plug>(easymotion-k)
 
 " Toggle spell checking on and off with `,s`
 nmap <silent> <leader>s :set spell!<CR>
@@ -211,27 +201,8 @@ endif
 " make it as easy as possible to open my vimrc file
 nmap <leader>v :tabedit $MYVIMRC<CR>
 
-" simplify working with split windows - http://vimcasts.org/episodes/working-with-windows/
-" nice idea, but it conflicts with how I have UltiSnips set up - I kinda like
-" the longer format with the w for now anyway - leaving it here until I get
-" used to using UtliSnips.
-" map <C-h> <C-w>h
-" map <C-j> <C-w>j
-" map <C-k> <C-w>k
-" map <C-l> <C-w>l
-
 " trying out this trim whitspace thing from: http://stackoverflow.com/questions/356126/how-can-you-automatically-remove-trailing-whitespace-in-vim
 autocmd BufWritePre *.txt,*.html :%s/\s\+$//e
-
-" ultisnips setup
-" " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsSnippetDirectories=["UltiSnips"]
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<C-b>"
-let g:UltiSnipsJumpBackwardTrigger="<C-z>"
-
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
 
 " Bubble single lines
 nmap <C-Up> [e
@@ -261,47 +232,9 @@ inoremap <C-f>  <Right>
 inoremap <C-d>  <Delete>
 inoremap <C-k>   <C-o>D
 
-
 " Lightline stuff
 set noshowmode
 set laststatus=2
-"let g:lightline = {
-"      \ 'colorscheme': 'wombat',
-"      \ 'tabline_separator': { 'left': "", 'right': "" },
-"      \ 'tabline_subseparator': { 'left': "", 'right': "" },
-"      \ }
-"	let g:lightline = {
-"		\ 'colorscheme': 'wombat',
-"		\ 'active': {
-"		\   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
-"		\ },
-"		\ 'component_function': {
-"		\   'fugitive': 'MyFugitive',
-"		\   'filename': 'MyFilename'
-"		\ }
-"		\ }
-"	function! MyModified()
-"		return &ft =~ 'help\|vimfiler' ? '' : &modified ? '+' : &modifiable ? '' : '-'
-"	endfunction
-"	function! MyReadonly()
-"		return &ft !~? 'help\|vimfiler' && &readonly ? 'RO' : ''
-"	endfunction
-"	function! MyFilename()
-"		return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
-"		\ (&ft == 'vim:filer' ? vimfiler#get_status_string() :
-"		\  &ft == 'unite' ? unite#get_status_string() :
-"		\  &ft == 'vimshell' ? vimshell#get_status_string() :
-"		\ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
-"		\ ('' != MyModified() ? ' ' . MyModified() : '')
-"	endfunction
-"	function! MyFugitive()
-"		if &ft !~? 'vimfiler' && exists("*fugitive#head")
-"			return fugitive#head()
-"		endif
-"		return ''
-"	endfunction
-"
-"
 let g:lightline = {
       \ 'colorscheme': 'wombat',
       \ 'active': {
