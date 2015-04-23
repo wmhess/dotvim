@@ -423,8 +423,6 @@ let g:unite_force_overwrite_statusline = 0
 let g:vimfiler_force_overwrite_statusline = 0
 let g:vimshell_force_overwrite_statusline = 0
 
-<<<<<<< .merge_file_P2feXU
-=======
 " almost as good as leader spacebar, but not quite.
 nnoremap <silent> <Leader>/ :nohlsearch<CR>
 
@@ -436,4 +434,3 @@ noremap L $
 
 vmap > >gv
 vmap < <gv
->>>>>>> .merge_file_s534Sx
