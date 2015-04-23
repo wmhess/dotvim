@@ -17,8 +17,8 @@ call vundle#rc()
 "let path = '~/some/path/here'
 "call vundle#rc(path)
 " let Vundle manage Vundle, required
-Plugin 'git://github.com/gmarik/vundle.git'
-
+"Plugin 'git://github.com/gmarik/vundle.git'
+Plugin 'git@github.com:gmarik/Vundle.vim.git'
 " My Plugins will plug-in here:
 Plugin 'git@github.com:flazz/vim-colorschemes.git'
 Plugin 'git@github.com:kien/ctrlp.vim.git'
