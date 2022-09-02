@@ -4,6 +4,7 @@
 " # My changes: (wxh249 additions)  are at the bottom.
 "
 " Don't try to be vi compatible
+
 set nocompatible
 
 " Helps force plugins to load correctly when it is turned back on below
@@ -17,14 +18,14 @@ syntax on
 " For plugins to load correctly
 filetype plugin indent on
 
-" TODO: Pick a leader key
+" TODO: Pick a leader key (probably pick space instead)
 " let mapleader = ","
 
 " Security
 set modelines=0
 
-" Show line numbers
-set number
+" Show line numbers (see alt setup below)
+" set number
 
 " Show file stats
 set ruler
@@ -105,7 +106,8 @@ let g:solarized_termcolors=256
 let g:solarized_termtrans=1
 " put https://raw.github.com/altercation/vim-colors-solarized/master/colors/solarized.vim
 " in ~/.vim/colors/ and uncomment:
-colorscheme nord
+" colorscheme nord
+colorscheme spaceway
 
 " ===============================
 " wxh249 additions:
@@ -113,11 +115,16 @@ colorscheme nord
 " (grr) stop bilnking too!
 set vb t_vb=
 
+" Show invisibles like in VSCode is a pain in the butt in vim.
+" Just run :set list when you really want to see them.
+set nolist
+set listchars=tab:\ \ ,trail:·,eol:¬,nbsp:_,space:·
+
 " higlight the current cursor line
 set cursorline
 
-"Use a line cursor within insert mode and a block cursor everywhere else.
-"
+" Use a line cursor within insert mode and a block cursor everywhere else.
+" Also - get blinky with it.
 " Reference chart of values:
 "   Ps = 0  -> blinking block.
 "   Ps = 1  -> blinking block (default).
@@ -128,3 +135,44 @@ set cursorline
 "   Ps = 6  -> steady bar (xterm).
 let &t_SI = "\e[5 q"
 let &t_EI = "\e[1 q"
+
+" Insert mode mappings to mimic some the emacs keybindings ctrl-n and ctrl-p are obviously a bad idea:
+inoremap <C-e> <C-o>$
+inoremap <C-a> <C-o>0
+inoremap <C-b> <Left>
+inoremap <C-f> <Right>
+inoremap <C-d> <Delete>
+inoremap <C-k> <C-o>D
+inoremap ;; <Esc>
+
+" Need to rethink these - the <C-m> one is causing problems
+" inoremap <A-m> <Esc>
+" inoremap <D-m> <Esc>
+" inoremap <C-m> <Esc>
+
+" Now lets add the Control + vim motions to normal mode
+inoremap <C-j> <C-o>j
+inoremap <C-k> <C-o>k
+inoremap <C-h> <C-o>h
+inoremap <C-l> <C-o>l
+
+" Move lines up and down (using option down/up like in VSCode)
+nnoremap <A-Down> :m+<CR>==
+nnoremap <A-Up> :m-2<CR>==
+inoremap <A-Down> <Esc>:m+<CR>==gi
+inoremap <A-Up> <Esc>:m-2<CR>==gi
+vnoremap <A-Down> :m'>+<CR>gv=gv
+vnoremap <A-Up> :m-2<CR>gv=gv
+
+" set number relativenumber
+
+" fancy number toggle thing from https://jeffkreeftmeijer.com/vim-number/
+:set number
+
+:augroup numbertoggle
+:  autocmd!
+:  autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && mode() != "i" | set rnu   | endif
+:  autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu                  | set nornu | endif
+:augroup END
+
+
