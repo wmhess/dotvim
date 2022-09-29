@@ -19,7 +19,7 @@ syntax on
 filetype plugin indent on
 
 " TODO: Pick a leader key (probably pick space instead)
-" let mapleader = ","
+let mapleader = " "
 
 " Security
 set modelines=0
@@ -175,4 +175,5 @@ vnoremap <A-Up> :m-2<CR>gv=gv
 :  autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu                  | set nornu | endif
 :augroup END
 
-
+" Makes copy to system clipboard not need "*y
+set clipboard=unnamed
